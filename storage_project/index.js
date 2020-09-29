@@ -21,28 +21,10 @@ class InMemoryStorage {
         return item;
     }
 
-    where(collectionName, where) {
-        let results = [];
-        storage[collectionName].forEach(element => {
-
-            if (_.isEqual(element, where)) {
-                results.push(element);
-            }
-        });
-
-        return results;
-    }
-
-    where(collectionName) {
-        return storage[collectionName];
-    }
-
-
-    remove(collectionName, findFunc) {
-        let resulte = storage[collectionName].find(findFunc);
-        storage[collectionName].remove(findFunc);
-
-        return resulte;
+    getByName(collectionName) {
+        let obj2 = {}
+        obj2[collectionName]= this.storage[collectionName]
+        return obj2;
     }
 }
 
