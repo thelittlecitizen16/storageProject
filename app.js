@@ -1,24 +1,15 @@
-const storageApi =require('./storage_project');
-const express = require('express');
+const {InMemoryStorage, InMemorySharedStorage} =require('./storage_project/index');
+const express = require('express')
+const app = express()
+const port = 8000
 
-const app = express();
-
-const inMemoryShared =new storageApi.InMemorySharedStorage();
-
-app.get('/api/users/{userId}', (req,res) => {
-    //const user =inMemoryShared.find('users',)
-    res.json({"name":"afek"});
-});
-
-app.use(function (err, req, response, next){
-    response.status(400).send('Error!')
-});
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(require('./storage_project/routes/router'));
 
 
-app.listen('3000',() => {console.log("app listen in 3000")});
-
-
-
-
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
 
 
